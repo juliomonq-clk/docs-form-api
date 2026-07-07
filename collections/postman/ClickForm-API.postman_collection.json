@@ -1,0 +1,4074 @@
+{
+  "item": [
+    {
+      "name": "Forms",
+      "description": "Formulários base e metadados.",
+      "item": [
+        {
+          "id": "052b16fe-3d05-4b3b-b7e4-6828972c5b1b",
+          "name": "Lista todos os formulários",
+          "request": {
+            "name": "Lista todos os formulários",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "forms"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {},
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e7ef57e-54a7-4590-a8b9-2d3f0a28e7d3",
+              "name": "Lista de metadados de formulários (pode ser vazia).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70881291-6f2e-4b76-bd91-82926bd9f60b",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d8aff58-d3ef-46e6-9320-775f07a22edf",
+          "name": "Cria o formulário base",
+          "request": {
+            "name": "Cria o formulário base",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "forms"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"callback_url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "990aef93-f1da-4dfd-bd0c-e9d983a7a8e9",
+              "name": "Formulário criado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"callback_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76e59337-78d5-46a2-a26b-5b693a47b2c4",
+              "name": "Requisição inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"callback_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "790b1c25-da66-4b67-80ba-a3a6ec2cd026",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"callback_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ed3c905-de5d-4049-bee9-4654bc6108ba",
+          "name": "Retorna metadados de um formulário específico",
+          "request": {
+            "name": "Retorna metadados de um formulário específico",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "forms",
+                ":form_key"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "form_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID do formulário.",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {},
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79c0a76a-c4e4-4d7b-b7fd-48d54ace6e01",
+              "name": "Metadados encontrados.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0d6c186-9c72-4dd2-8290-c14c5e7040c3",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7387f3ca-1871-421f-ac56-8b440d4cdf7e",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24b47100-aad6-420e-b19d-f47263f828df",
+          "name": "Atualiza os metadados do formulário",
+          "request": {
+            "name": "Atualiza os metadados do formulário",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "forms",
+                ":form_key"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "form_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID do formulário.",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"callback_url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9b63530-c995-4ea3-9594-e9c5a770349b",
+              "name": "Formulário atualizado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"callback_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f5220ff-90ce-44bb-9dbb-b7177022e816",
+              "name": "Requisição inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"callback_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4ba79a4-fded-471c-b73b-9d9f8f0aeb9a",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"callback_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cab2d268-3a13-4f7c-9276-34274228b112",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"callback_url\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "306cd2fc-fae5-456c-b9a2-1c4d45186b9d",
+          "name": "Remove um formulário",
+          "request": {
+            "name": "Remove um formulário",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "forms",
+                ":form_key"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "form_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID do formulário.",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {},
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "983897df-a6d3-41fe-97b8-b2884c7e2e27",
+              "name": "Formulário removido (sem corpo).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [],
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "75c1bda5-be06-4314-955d-920cd219c28d",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a134d436-5797-4047-a73a-e0f573d5a800",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "Versions",
+      "description": "Versões de formulários (campos e configurações).",
+      "item": [
+        {
+          "id": "4a87c222-b506-4a29-b949-15baa8c03b11",
+          "name": "Lista todas as versões de um formulário",
+          "request": {
+            "name": "Lista todas as versões de um formulário",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "forms",
+                ":form_key",
+                "versions"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "form_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID do formulário.",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {},
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c195263f-75bf-4a9e-a048-7248dc1e88d2",
+              "name": "Lista de versões.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"key\": \"<uuid>\",\n    \"version\": \"<uuid>\",\n    \"is_active\": \"<boolean>\",\n    \"fields\": [\n      {\n        \"label\": \"<string>\",\n        \"type\": \"<string>\",\n        \"key\": \"<string>\",\n        \"required\": \"<boolean>\",\n        \"order\": \"<integer>\",\n        \"step\": \"<integer>\",\n        \"placeholder\": \"<string>\",\n        \"help_balloon\": \"<string>\",\n        \"conditions\": [\n          {\n            \"value\": \"<string>\",\n            \"operator\": \"<string>\",\n            \"action\": \"hide\",\n            \"fields\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"value\": \"<string>\",\n            \"operator\": \"<string>\",\n            \"action\": \"show\",\n            \"fields\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"options\": {\n          \"key_0\": \"string\",\n          \"key_1\": true\n        }\n      },\n      {\n        \"label\": \"<string>\",\n        \"type\": \"<string>\",\n        \"key\": \"<string>\",\n        \"required\": \"<boolean>\",\n        \"order\": \"<integer>\",\n        \"step\": \"<integer>\",\n        \"placeholder\": \"<string>\",\n        \"help_balloon\": \"<string>\",\n        \"conditions\": [\n          {\n            \"value\": \"<string>\",\n            \"operator\": \"<string>\",\n            \"action\": \"hide\",\n            \"fields\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"value\": \"<string>\",\n            \"operator\": \"<string>\",\n            \"action\": \"show\",\n            \"fields\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"options\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"settings\": {\n      \"title\": \"<string>\",\n      \"subtitle\": \"<string>\",\n      \"finish_title\": \"<string>\",\n      \"finish_subtitle\": \"<string>\",\n      \"finish_info\": \"<string>\",\n      \"steps\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    },\n    \"form_url\": \"<uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  {\n    \"key\": \"<uuid>\",\n    \"version\": \"<uuid>\",\n    \"is_active\": \"<boolean>\",\n    \"fields\": [\n      {\n        \"label\": \"<string>\",\n        \"type\": \"<string>\",\n        \"key\": \"<string>\",\n        \"required\": \"<boolean>\",\n        \"order\": \"<integer>\",\n        \"step\": \"<integer>\",\n        \"placeholder\": \"<string>\",\n        \"help_balloon\": \"<string>\",\n        \"conditions\": [\n          {\n            \"value\": \"<string>\",\n            \"operator\": \"<string>\",\n            \"action\": \"show\",\n            \"fields\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"value\": \"<string>\",\n            \"operator\": \"<string>\",\n            \"action\": \"hide\",\n            \"fields\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"options\": {\n          \"key_0\": 9035.813349991753,\n          \"key_1\": false\n        }\n      },\n      {\n        \"label\": \"<string>\",\n        \"type\": \"<string>\",\n        \"key\": \"<string>\",\n        \"required\": \"<boolean>\",\n        \"order\": \"<integer>\",\n        \"step\": \"<integer>\",\n        \"placeholder\": \"<string>\",\n        \"help_balloon\": \"<string>\",\n        \"conditions\": [\n          {\n            \"value\": \"<string>\",\n            \"operator\": \"<string>\",\n            \"action\": \"show\",\n            \"fields\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          },\n          {\n            \"value\": \"<string>\",\n            \"operator\": \"<string>\",\n            \"action\": \"show\",\n            \"fields\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        ],\n        \"options\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"settings\": {\n      \"title\": \"<string>\",\n      \"subtitle\": \"<string>\",\n      \"finish_title\": \"<string>\",\n      \"finish_subtitle\": \"<string>\",\n      \"finish_info\": \"<string>\",\n      \"steps\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\"\n      }\n    },\n    \"form_url\": \"<uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ce06ee1-502b-469a-b7d7-85e97cf2aea4",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c28e58f-7eaa-486e-b5db-e7ee4ef578b7",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "058c3c59-2ae2-4adb-bd56-dd1101e519f0",
+          "name": "Cria uma nova versão (schema) do formulário",
+          "request": {
+            "name": "Cria uma nova versão (schema) do formulário",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "forms",
+                ":form_key",
+                "versions"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "form_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID do formulário.",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_active\": \"<boolean>\",\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9602\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45bf6860-a392-4a33-8870-c28e98976f30",
+              "name": "Versão criada.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": \"<boolean>\",\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9602\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"<uuid>\",\n  \"version\": \"<uuid>\",\n  \"is_active\": \"<boolean>\",\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": 2290.541629775805,\n        \"key_1\": 1835\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"hide\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9776,\n        \"key_2\": 4076.5125069742394\n      }\n    }\n  ],\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    }\n  },\n  \"form_url\": \"<uri>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4da59861-2f8a-4527-a750-1664da291954",
+              "name": "Requisição inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": \"<boolean>\",\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9602\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7e3193d-8d1c-4a5b-b5ad-2585b3736ba9",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": \"<boolean>\",\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9602\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4124530-954c-4ded-a5cd-b75be4390151",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": \"<boolean>\",\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9602\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c925b4c7-cca3-46d9-b6a3-41a9bb5923b7",
+          "name": "Retorna a estrutura da versão",
+          "request": {
+            "name": "Retorna a estrutura da versão",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "forms",
+                ":form_key",
+                "versions",
+                ":version_key"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "form_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID do formulário.",
+                    "type": "text/plain"
+                  }
+                },
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID da versão do schema.",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {},
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a5ad143-f38c-4b92-8198-799531f3e532",
+              "name": "Schema da versão.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions",
+                    ":version_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"<uuid>\",\n  \"version\": \"<uuid>\",\n  \"is_active\": \"<boolean>\",\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": 2290.541629775805,\n        \"key_1\": 1835\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"hide\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9776,\n        \"key_2\": 4076.5125069742394\n      }\n    }\n  ],\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    }\n  },\n  \"form_url\": \"<uri>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "141bcd42-6066-4d7b-9106-6e4041e20beb",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions",
+                    ":version_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4347f132-8a8a-4ef4-b4bd-bc801777947d",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions",
+                    ":version_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26d3725f-b8df-4d43-9d64-d4aefb438dba",
+          "name": "Atualiza metadados da versão (ex.: is_active)",
+          "request": {
+            "name": "Atualiza metadados da versão (ex.: is_active)",
+            "description": {
+              "content": "Permite ajustar `is_active`, substituir `fields` e `settings` conforme regras de negócio da API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "forms",
+                ":form_key",
+                "versions",
+                ":version_key"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "form_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID do formulário.",
+                    "type": "text/plain"
+                  }
+                },
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID da versão do schema.",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_active\": \"<boolean>\",\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9602\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "817768db-1d80-466f-a4e0-2749eb05dc10",
+              "name": "Versão atualizada.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions",
+                    ":version_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": \"<boolean>\",\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9602\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"<uuid>\",\n  \"version\": \"<uuid>\",\n  \"is_active\": \"<boolean>\",\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": 2290.541629775805,\n        \"key_1\": 1835\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"hide\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9776,\n        \"key_2\": 4076.5125069742394\n      }\n    }\n  ],\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    }\n  },\n  \"form_url\": \"<uri>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7ad0924-f414-43cc-84c5-44678b3f26a3",
+              "name": "Requisição inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions",
+                    ":version_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": \"<boolean>\",\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9602\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54aae04b-9297-4a29-bba4-495d9b16383c",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions",
+                    ":version_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": \"<boolean>\",\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9602\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bd0dd5e-dad1-4708-b320-e3949e692a47",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions",
+                    ":version_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"is_active\": \"<boolean>\",\n  \"settings\": {\n    \"title\": \"<string>\",\n    \"subtitle\": \"<string>\",\n    \"finish_title\": \"<string>\",\n    \"finish_subtitle\": \"<string>\",\n    \"finish_info\": \"<string>\",\n    \"steps\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"fields\": [\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": false\n      }\n    },\n    {\n      \"label\": \"<string>\",\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"step\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"help_balloon\": \"<string>\",\n      \"conditions\": [\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"value\": \"<string>\",\n          \"operator\": \"<string>\",\n          \"action\": \"show\",\n          \"fields\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9602\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "184aadf4-baea-4d9d-8c36-fd8697f00d8b",
+          "name": "Remove uma versão específica",
+          "request": {
+            "name": "Remove uma versão específica",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "forms",
+                ":form_key",
+                "versions",
+                ":version_key"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "form_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID do formulário.",
+                    "type": "text/plain"
+                  }
+                },
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID da versão do schema.",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {},
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f0788f0-8344-4ce6-a8f0-a071bdd5a443",
+              "name": "Versão removida (sem corpo).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions",
+                    ":version_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [],
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2497a931-b004-4a1c-a115-f349e4b3d0fb",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions",
+                    ":version_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62f2a607-dc20-4443-8369-c0bf159dfc83",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "forms",
+                    ":form_key",
+                    "versions",
+                    ":version_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID do formulário.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "form_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "Runs",
+      "description": "Pré-preenchimento de uma versão - criação de rota de formulário individual.",
+      "item": [
+        {
+          "id": "1b1a21eb-5d79-4e29-ae84-25b40b4691e5",
+          "name": "Lista todas as execuções associadas a uma versão",
+          "request": {
+            "name": "Lista todas as execuções associadas a uma versão",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "versions",
+                ":version_key",
+                "runs"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID da versão do schema.",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {},
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06b60719-f9b5-40e2-b209-9a81a443110c",
+              "name": "Lista de execuções (pode ser vazia).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"key\": \"<uuid>\",\n    \"status\": \"done\",\n    \"context\": {\n      \"key_0\": {}\n    },\n    \"responses\": {\n      \"key_0\": \"string\",\n      \"key_1\": 99\n    },\n    \"expires_at\": \"<dateTime>\",\n    \"callback_url\": \"<uri>\",\n    \"access_verification\": {\n      \"label\": \"<string>\",\n      \"expected_value\": \"<string>\",\n      \"mask_percentage\": 90\n    },\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"form_url\": \"<uri>\"\n  },\n  {\n    \"key\": \"<uuid>\",\n    \"status\": \"access_verification_required\",\n    \"context\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"responses\": {\n      \"key_0\": 4733\n    },\n    \"expires_at\": \"<dateTime>\",\n    \"callback_url\": \"<uri>\",\n    \"access_verification\": {\n      \"label\": \"<string>\",\n      \"expected_value\": \"<string>\",\n      \"mask_percentage\": 90\n    },\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"form_url\": \"<uri>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d056d929-3d1c-43d9-b56b-ff3b200abf00",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb39e6a2-0da1-451d-8c23-d48d5128f61a",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd2d727a-65df-4464-ba84-9092c86b9d72",
+          "name": "Cria uma versão pré-preenchida do formulário para preenchimento único",
+          "request": {
+            "name": "Cria uma versão pré-preenchida do formulário para preenchimento único",
+            "description": {
+              "content": "Cria uma nova execução para o `form_key` informado, associada à `version_key` no corpo, com mapa `context` de pré-preenchimento.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "versions",
+                ":version_key",
+                "runs"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID da versão do schema.",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"key_0\": {}\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"notification\": {},\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6619b110-316b-40f4-aa08-5722189e78a7",
+              "name": "Execução criada.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"key_0\": {}\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"notification\": {},\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"<uuid>\",\n  \"status\": \"pending\",\n  \"context\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"responses\": {\n    \"key_0\": 8441.558718650596,\n    \"key_1\": false\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"form_url\": \"<uri>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dda8cd05-aeed-4f27-bc1c-3fa29f7299da",
+              "name": "Requisição inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"key_0\": {}\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"notification\": {},\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a428522-5141-49e0-828a-c749ec14e5dc",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"key_0\": {}\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"notification\": {},\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57312058-14dd-4c5c-947b-1250d80bd732",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"key_0\": {}\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"notification\": {},\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a24ea7e-025f-418f-a105-97c0ba017e6b",
+          "name": "Obtém uma execução (run) por versão",
+          "request": {
+            "name": "Obtém uma execução (run) por versão",
+            "description": {
+              "content": "Implementação `GET /api/v1/versions/{version_key}/runs/{run_key}`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "versions",
+                ":version_key",
+                "runs",
+                ":run_key"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID da versão do schema.",
+                    "type": "text/plain"
+                  }
+                },
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "run_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID da execução (run).",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {},
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ef9bdf8-fbc7-4fc9-a37d-a233acb37c12",
+              "name": "Run encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"<uuid>\",\n  \"status\": \"pending\",\n  \"context\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"responses\": {\n    \"key_0\": 8441.558718650596,\n    \"key_1\": false\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"form_url\": \"<uri>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b306d3d-af80-4fff-ae64-cf58c07a6670",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dca84194-16e5-4c96-88bc-5446f1d184c8",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d4044b2-eeee-49ed-a667-3204671ee20d",
+          "name": "Atualiza contexto, expires_at ou callback_url do run",
+          "request": {
+            "name": "Atualiza contexto, expires_at ou callback_url do run",
+            "description": {
+              "content": "Implementação `PUT /api/v1/versions/{version_key}/runs/{run_key}`.\nRun com `status: done` não pode ser alterado (409).\nSe o run não possuir `access_verification` e a atualização passar a incluir esse objeto,\no `status` passa para `access_verification_required`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "versions",
+                ":version_key",
+                "runs",
+                ":run_key"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID da versão do schema.",
+                    "type": "text/plain"
+                  }
+                },
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "run_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID da execução (run).",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"key_0\": {}\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d23c9f1c-98ef-49cf-8a60-cadd8e2c8245",
+              "name": "Run atualizado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"key_0\": {}\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"<uuid>\",\n  \"status\": \"pending\",\n  \"context\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"responses\": {\n    \"key_0\": 8441.558718650596,\n    \"key_1\": false\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  },\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"form_url\": \"<uri>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f84956fa-04df-4d97-bfc5-b5b2deef4c82",
+              "name": "Requisição inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"key_0\": {}\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4085c34-098e-42b0-92b6-54bb516747d7",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"key_0\": {}\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2faf627c-0ea0-4bb2-8ebe-6e178d02d3c7",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"key_0\": {}\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec3a9dfd-b663-4880-9265-17a7f92f5fa9",
+              "name": "Run já finalizado (não pode ser modificado).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"key_0\": {}\n  },\n  \"expires_at\": \"<dateTime>\",\n  \"callback_url\": \"<uri>\",\n  \"access_verification\": {\n    \"label\": \"<string>\",\n    \"expected_value\": \"<string>\",\n    \"mask_percentage\": 90\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09c27000-edf8-4f21-a519-368188e1b006",
+          "name": "Remove uma execução pendente",
+          "request": {
+            "name": "Remove uma execução pendente",
+            "description": {
+              "content": "Run com `status: done` não pode ser excluído (409).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "versions",
+                ":version_key",
+                "runs",
+                ":run_key"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "version_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID da versão do schema.",
+                    "type": "text/plain"
+                  }
+                },
+                {
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "run_key",
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) UUID da execução (run).",
+                    "type": "text/plain"
+                  }
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {},
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53967ebc-dd56-4af5-a199-acc1a3cda2fa",
+              "name": "Run removido (sem corpo).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [],
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e4bebf07-2ad8-4f2c-800e-077e87e82d45",
+              "name": "Autenticação ausente ou inválida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5b349de-009f-4164-8ba0-9119f9051449",
+              "name": "Recurso não encontrado.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0eb4a3b-3c2d-4828-856c-7711d632da6a",
+              "name": "Run já finalizado (não pode ser removido).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "versions",
+                    ":version_key",
+                    "runs",
+                    ":run_key"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da versão do schema.",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "version_key"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) UUID da execução (run).",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "run_key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "description": "Disponibilidade do serviço",
+      "item": [
+        {
+          "id": "34c3bf4c-bd23-44a2-b5b9-65dc7fdf27fd",
+          "name": "Verifica disponibilidade do serviço",
+          "request": {
+            "name": "Verifica disponibilidade do serviço",
+            "description": {
+              "content": "Consulta o banco de dados. **Não requer** cabeçalho `Authorization`.\nRetorna JSON com o campo `status`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "health"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {},
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9423ce4b-3abc-4c18-9c6f-d2e382ef990b",
+              "name": "Serviço OK — conectividade com banco de dados estabelecida.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12c49472-fde8-4008-9b5d-7856397cdab2",
+              "name": "Limite de requisições por IP excedido.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Segundos até a próxima tentativa permitida (derivado de `HEALTH_RATE_LIMIT_RPM`;\npadrão 60 req/min → valor `1`).\n",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "body": "{\n  \"status\": \"too_many_requests\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10047db9-2dc6-4ecb-aad9-fbe3e96bed36",
+              "name": "Serviço indisponível — falha ao se conectar com o banco de dados.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health"
+                  ],
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "type": "any",
+        "value": "Authorization",
+        "key": "key"
+      },
+      {
+        "type": "any",
+        "value": "{{access_token}}",
+        "key": "value"
+      },
+      {
+        "type": "any",
+        "value": "header",
+        "key": "in"
+      }
+    ]
+  },
+  "event": [],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "",
+      "type": "string",
+      "description": "Host + prefixo da API do ClickForm (ex.: https://SUBSTITUIR/api). Confirmar com o time técnico — não documentado publicamente ainda."
+    },
+    {
+      "key": "form_key",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "version_key",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "run_key",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "info": {
+    "_postman_id": "df7d7e21-0435-4b81-a39f-10ed709926ea",
+    "name": "ClickForm — Motor de Coleta de Dados",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**📄 Visão geral**\n\nO ClickForm é um motor de coleta de dados desacoplado da geração de documentos, permitindo que sistemas criem e executem formulários versionados consumidos via API por múltiplos canais.\n\nEle permite a criação de links dinâmicos para preenchimento único (com injeção de dados prévios para reduzir a fricção na jornada do usuário), armazenamento estruturado das respostas em formato JSON e envio automatizado de callbacks (webhooks) para sistemas externos após cada submissão.\n\nAlém disso, a arquitetura suporta a customização visual do formulário e das mensagens de sucesso com base nas configurações da conta no monolito Távola.\n\n**💾 Modelo de domínio**\n\nA API opera de forma stateless, com o estado autoritativo persistido de forma segura e altamente escalável. O domínio está estruturado em 3 modelos principais:\n* **Form:** Representa a definição base e os metadados do formulário.\n* **Version:** Representa a estrutura imutável do formulário, contendo os campos e a configuração de cada versão.\n* **Run:** Representa as instâncias do formulário em execução. É onde ocorre a injeção do \"context\" com dados pré-preenchidos para geração do link do formulário para preenchimento único.\n\n**🔒 Autenticação e Segurança**\n\nA autenticação é exclusivamente através do envio de um access_token (UUID) no Header HTTP `Authorization` (informado sem prefixos como \"Bearer\").\nEsse token pode ser obtido na página de configurações da API no Távola.\n",
+      "type": "text/plain"
+    }
+  }
+}

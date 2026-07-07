@@ -1,0 +1,11 @@
+meta {
+  name: Retorna metadados de um formulário específico
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{base_url}}/api/v1/forms/{{form_key}}
+  body: none
+  auth: inherit
+}

@@ -1,0 +1,11 @@
+meta {
+  name: Retorna a estrutura da versão
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{base_url}}/api/v1/forms/{{form_key}}/versions/{{version_key}}
+  body: none
+  auth: inherit
+}

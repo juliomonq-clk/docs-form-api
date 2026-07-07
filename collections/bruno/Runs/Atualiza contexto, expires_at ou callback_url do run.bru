@@ -1,0 +1,18 @@
+meta {
+  name: Atualiza contexto, expires_at ou callback_url do run
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{base_url}}/api/v1/versions/{{version_key}}/runs/{{run_key}}
+  body: none
+  auth: inherit
+}
+
+docs {
+  Implementação `PUT /api/v1/versions/{version_key}/runs/{run_key}`.
+  Run com `status: done` não pode ser alterado (409).
+  Se o run não possuir `access_verification` e a atualização passar a incluir esse objeto,
+  o `status` passa para `access_verification_required`.
+}

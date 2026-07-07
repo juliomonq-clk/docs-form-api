@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "ClickForm — Motor de Coleta de Dados",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

@@ -1,0 +1,1555 @@
+openapi: 3.0.3
+info:
+  title: ClickForm — Motor de Coleta de Dados
+  version: 1.0.0
+  description: |
+    **📄 Visão geral**
+
+    O ClickForm é um motor de coleta de dados desacoplado da geração de documentos, permitindo que sistemas criem e executem formulários versionados consumidos via API por múltiplos canais.
+
+    Ele permite a criação de links dinâmicos para preenchimento único (com injeção de dados prévios para reduzir a fricção na jornada do usuário), armazenamento estruturado das respostas em formato JSON e envio automatizado de callbacks (webhooks) para sistemas externos após cada submissão.
+
+    Além disso, a arquitetura suporta a customização visual do formulário e das mensagens de sucesso com base nas configurações da conta no monolito Távola.
+
+    **💾 Modelo de domínio**
+
+    A API opera de forma stateless, com o estado autoritativo persistido de forma segura e altamente escalável. O domínio está estruturado em 3 modelos principais:
+    * **Form:** Representa a definição base e os metadados do formulário.
+    * **Version:** Representa a estrutura imutável do formulário, contendo os campos e a configuração de cada versão.
+    * **Run:** Representa as instâncias do formulário em execução. É onde ocorre a injeção do "context" com dados pré-preenchidos para geração do link do formulário para preenchimento único.
+
+    **🔒 Autenticação e Segurança**
+
+    A autenticação é exclusivamente através do envio de um access_token (UUID) no Header HTTP `Authorization` (informado sem prefixos como "Bearer").
+    Esse token pode ser obtido na página de configurações da API no Távola.
+
+tags:
+  - name: Forms
+    description: Formulários base e metadados.
+  - name: Versions
+    description: Versões de formulários (campos e configurações).
+  - name: Runs
+    description: Pré-preenchimento de uma versão - criação de rota de formulário individual.
+  - name: Health
+    description: Disponibilidade do serviço
+
+security:
+  - ApiTokenAuth: []
+
+paths:
+  /api/v1/forms:
+    get:
+      tags:
+        - Forms
+      summary: Lista todos os formulários
+      operationId: listForms
+      responses:
+        "200":
+          description: Lista de metadados de formulários (pode ser vazia).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                sample:
+                  value:
+                    - key: 9b2e4f6a-1c3d-5e7f-8091-a2b3c4d5e6f7
+                      name: Cadastro de cliente
+                      account_id: acc_01HQXYZ
+                      user_id: usr_01HQXYZ
+                      created_at: "2026-05-06T12:00:00Z"
+                      updated_at: "2026-05-06T12:00:00Z"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      tags:
+        - Forms
+      summary: Cria o formulário base
+      operationId: createForm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                callback_url:
+                  type: string
+                  format: uri
+            examples:
+              minimal:
+                summary: Campos mínimos
+                value:
+                  name: Cadastro de cliente
+                  callback_url: https://partner.example.com/hooks/clickform
+              withCallback:
+                summary: Com URL de callback
+                value:
+                  name: Adesão ao produto
+                  callback_url: https://partner.example.com/hooks/clickform
+      responses:
+        "201":
+          description: Formulário criado.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                minimal:
+                  summary: Resposta ao request "minimal"
+                  value:
+                    key: 9b2e4f6a-1c3d-5e7f-8091-a2b3c4d5e6f7
+                    name: Cadastro de cliente
+                    callback_url: https://partner.example.com/hooks/clickform
+                    account_id: acc_01HQXYZ
+                    user_id: usr_01HQXYZ
+                    created_at: "2026-05-06T12:00:00Z"
+                    updated_at: "2026-05-06T12:00:00Z"
+                withCallback:
+                  summary: Resposta ao request "withCallback"
+                  value:
+                    key: b2c3d4e5-f6a7-8091-a2b3-c4d5e6f70819
+                    name: Adesão ao produto
+                    callback_url: https://partner.example.com/hooks/clickform
+                    account_id: acc_01HQXYZ
+                    user_id: usr_01HQXYZ
+                    created_at: "2026-05-06T12:00:00Z"
+                    updated_at: "2026-05-06T12:00:00Z"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /api/v1/forms/{form_key}:
+    get:
+      tags:
+        - Forms
+      summary: Retorna metadados de um formulário específico
+      operationId: getFormById
+      parameters:
+        - $ref: "#/components/parameters/FormKey"
+      responses:
+        "200":
+          description: Metadados encontrados.
+          content:
+            application/json:
+              schema:
+                type: object
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - Forms
+      summary: Atualiza os metadados do formulário
+      operationId: updateForm
+      parameters:
+        - $ref: "#/components/parameters/FormKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                callback_url:
+                  type: string
+                  format: uri
+                  nullable: true
+            examples:
+              updateName:
+                summary: Atualizar nome e callback
+                value:
+                  name: Cadastro de cliente — revisão 2
+                  callback_url: https://partner.example.com/hooks/clickform-v2
+              clearCallback:
+                summary: Limpar callback (se API suportar null)
+                value:
+                  name: Cadastro de cliente
+                  callback_url: null
+      responses:
+        "200":
+          description: Formulário atualizado.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                updateName:
+                  summary: Resposta ao request "updateName"
+                  value:
+                    key: 9b2e4f6a-1c3d-5e7f-8091-a2b3c4d5e6f7
+                    name: Cadastro de cliente — revisão 2
+                    callback_url: https://partner.example.com/hooks/clickform-v2
+                    account_id: acc_01HQXYZ
+                    user_id: usr_01HQXYZ
+                    created_at: "2026-05-01T10:00:00Z"
+                    updated_at: "2026-05-06T14:30:00Z"
+                clearCallback:
+                  summary: Resposta ao request "clearCallback"
+                  value:
+                    key: 9b2e4f6a-1c3d-5e7f-8091-a2b3c4d5e6f7
+                    name: Cadastro de cliente
+                    callback_url: null
+                    account_id: acc_01HQXYZ
+                    user_id: usr_01HQXYZ
+                    created_at: "2026-05-01T10:00:00Z"
+                    updated_at: "2026-05-06T15:00:00Z"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - Forms
+      summary: Remove um formulário
+      operationId: deleteForm
+      parameters:
+        - $ref: "#/components/parameters/FormKey"
+      responses:
+        "204":
+          description: Formulário removido (sem corpo).
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/v1/forms/{form_key}/versions:
+    get:
+      tags:
+        - Versions
+      summary: Lista todas as versões de um formulário
+      operationId: listFormVersions
+      parameters:
+        - $ref: "#/components/parameters/FormKey"
+      responses:
+        "200":
+          description: Lista de versões.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FormVersion"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    post:
+      tags:
+        - Versions
+      summary: Cria uma nova versão (schema) do formulário
+      operationId: createFormVersion
+      parameters:
+        - $ref: "#/components/parameters/FormKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFormVersionRequest"
+            examples:
+              "Campos separados por etapas":
+                $ref: "#/components/examples/WithStepsExample"
+              "Texto curto":
+                $ref: "#/components/examples/TextExample"
+              "Texto longo":
+                $ref: "#/components/examples/TextareaExample"
+              "Número":
+                $ref: "#/components/examples/NumberExample"
+              "E-mail do signatário":
+                $ref: "#/components/examples/EmailExample"
+              "Número de Telefone/Whatsapp":
+                $ref: "#/components/examples/PhoneNumberExample"
+              "Data":
+                $ref: "#/components/examples/DateExample"
+              "CPF":
+                $ref: "#/components/examples/CpfExample"
+              "CNPJ":
+                $ref: "#/components/examples/CnpjExample"
+              "Monetário":
+                $ref: "#/components/examples/CurrencyExample"
+              "CEP":
+                $ref: "#/components/examples/CepExample"
+              "Imagem":
+                $ref: "#/components/examples/ImageExample"
+              "Anexo":
+                $ref: "#/components/examples/FileExample"
+              "Cabeçalho":
+                $ref: "#/components/examples/HeaderExample"
+              "Parágrafo":
+                $ref: "#/components/examples/ParagraphExample"
+              "Lista suspensa":
+                $ref: "#/components/examples/SelectExample"
+              "Única resposta":
+                $ref: "#/components/examples/RadioGroupExample"
+              "Múltiplas respostas":
+                $ref: "#/components/examples/CheckboxGroupExample"
+              "Repetidor de campos":
+                $ref: "#/components/examples/RepeaterExample"
+              "Campos com regras condicionais":
+                $ref: "#/components/examples/ConditionalForwardChainingExample"
+      responses:
+        "201":
+          description: Versão criada.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FormVersion"
+              example:
+                key: e4c3d0e8-a6d3-484e-9b00-cdd28232c694
+                version: e4c3d0e8-a6d3-484e-9b00-cdd28232c694
+                is_active: true
+                fields:
+                  - key: nome-completo-59661f5fe933
+                    label: Nome completo
+                    type: text
+                    placeholder: Maria da Silva
+                    required: true
+                    order: 1
+                  - key: whatsapp-f9c2322fcc74
+                    label: Whatsapp
+                    type: phone_number
+                    placeholder: (11) 99999-9999
+                    required: true
+                    order: 2
+                    step: 1
+                  - key: email-6679641e7540
+                    label: Email
+                    type: email
+                    placeholder: nome@empresa.com
+                    required: true
+                    order: 3
+                    step: 1
+                settings:
+                  steps:
+                    "0": Informações pessoais
+                    "1": Informações de contato
+                  title: Atualização de contato
+                  subtitle: Por favor, confirme os dados de contato.
+                  finish_title: Atualização de dados concluída!
+                  finish_subtitle: Em breve nossa equipe entrará em contato.
+                  finish_info: Visite nosso site para mais informações.
+                form_url: https://app.example.com/e4c3d0e8-a6d3-484e-9b00-cdd28232c694
+                created_at: "2026-05-06T14:45:31Z"
+                updated_at: "2026-05-06T14:45:31Z"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/v1/forms/{form_key}/versions/{version_key}:
+    get:
+      tags:
+        - Versions
+      summary: Retorna a estrutura da versão
+      operationId: getFormVersion
+      parameters:
+        - $ref: "#/components/parameters/FormKey"
+        - $ref: "#/components/parameters/VersionKey"
+      responses:
+        "200":
+          description: Schema da versão.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FormVersion"
+              example:
+                key: e4c3d0e8-a6d3-484e-9b00-cdd28232c694
+                version: e4c3d0e8-a6d3-484e-9b00-cdd28232c694
+                is_active: true
+                fields:
+                  - key: nome-completo-59661f5fe933
+                    label: Nome completo
+                    type: text
+                    placeholder: Maria da Silva
+                    required: true
+                    order: 1
+                settings:
+                  title: Atualização de contato
+                  subtitle: Por favor, confirme os dados de contato.
+                  finish_title: Atualização de dados concluída!
+                  finish_subtitle: Em breve nossa equipe entrará em contato.
+                  finish_info: Visite nosso site para mais informações.
+                form_url: https://app.example.com/e4c3d0e8-a6d3-484e-9b00-cdd28232c694
+                created_at: "2026-05-06T14:45:31Z"
+                updated_at: "2026-05-06T14:45:31Z"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - Versions
+      summary: "Atualiza metadados da versão (ex.: is_active)"
+      description: Permite ajustar `is_active`, substituir `fields` e `settings` conforme regras de negócio da API.
+      operationId: updateFormVersion
+      parameters:
+        - $ref: "#/components/parameters/FormKey"
+        - $ref: "#/components/parameters/VersionKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFormVersionRequest"
+            examples:
+              contatoEnderecoEnvio:
+                summary: Contato com CEP, envio (radio) e steps estendidos
+                value:
+                  settings:
+                    title: Atualização de contato
+                    subtitle: Por favor, confirme os dados de contato.
+                    finish_title: Atualização de dados concluída!
+                    finish_subtitle: Em breve nossa equipe entrará em contato.
+                    finish_info: Visite nosso site para mais informações.
+                    steps:
+                      "0": Informações pessoais
+                      "1": Informações de contato
+                      "2": Informações de endereço
+                  fields:
+                    - label: Full name
+                      type: text
+                      placeholder: Type your full name
+                      required: true
+                      step: 0
+                      order: 1
+                    - label: Email
+                      type: email
+                      placeholder: name@company.com
+                      required: true
+                      step: 1
+                      order: 2
+                    - key: cep_principal
+                      label: ZIP code
+                      type: cep
+                      placeholder: 00000-000
+                      required: true
+                      step: 2
+                      order: 3
+                      options:
+                        fields:
+                          - label: Street address
+                            attribute_type: street
+                            required: true
+                          - label: State
+                            attribute_type: state
+                            required: true
+                          - label: City
+                            attribute_type: city
+                          - label: Neighborhood
+                            attribute_type: neighborhood
+                          - label: Number
+                            attribute_type: number
+                          - label: Complement
+                            attribute_type: complement
+                    - label: Shipping method
+                      type: radio-group
+                      placeholder: Choose a shipping method
+                      required: false
+                      step: 2
+                      order: 6
+                      options:
+                        other: true
+                        values:
+                          - label: SEDEX
+                            value: SEDEX
+                          - label: Retirar presencialmente
+                            value: RETIRAR
+                          - label: PAC
+                            value: PAC
+              deactivate:
+                summary: Desativar versão
+                value:
+                  is_active: false
+                  fields:
+                    - key: email
+                      label: E-mail
+                      type: email
+                      placeholder: contato@empresa.com
+                      required: true
+                      order: 1
+              fullReplace:
+                summary: Atualizar fields e settings
+                value:
+                  is_active: true
+                  fields:
+                    - key: nome
+                      label: Nome
+                      type: text
+                      placeholder: Seu nome completo
+                      required: true
+                      order: 1
+                  settings:
+                    title: Fluxo atualizado
+                    finish_title: Obrigado
+      responses:
+        "200":
+          description: Versão atualizada.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FormVersion"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - Versions
+      summary: Remove uma versão específica
+      operationId: deleteFormVersion
+      parameters:
+        - $ref: "#/components/parameters/FormKey"
+        - $ref: "#/components/parameters/VersionKey"
+      responses:
+        "204":
+          description: Versão removida (sem corpo).
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/v1/versions/{version_key}/runs:
+    get:
+      tags:
+        - Runs
+      summary: Lista todas as execuções associadas a uma versão
+      operationId: listVersionRuns
+      parameters:
+        - $ref: "#/components/parameters/VersionKey"
+      responses:
+        "200":
+          description: Lista de execuções (pode ser vazia).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FormRun"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    post:
+      tags:
+        - Runs
+      summary: Cria uma versão pré-preenchida do formulário para preenchimento único
+      description: |
+        Cria uma nova execução para o `form_key` informado, associada à `version_key` no corpo, com mapa `context` de pré-preenchimento.
+      operationId: createRun
+      parameters:
+        - $ref: "#/components/parameters/VersionKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - context
+              properties:
+                context:
+                  type: object
+                  additionalProperties:
+                    type: object
+                expires_at:
+                  type: string
+                  format: date-time
+                callback_url:
+                  type: string
+                  format: uri
+                  description: URL opcional para webhook exclusivo desta execução (além da callback_url do formulário).
+                notification:
+                  type: object
+                access_verification:
+                  $ref: "#/components/schemas/RunAccessVerification"
+            examples:
+              prefillPorFieldKeys:
+                summary: Pré-preenchimento por keys dos campos + notificação WhatsApp
+                value:
+                  callback_url: https://erp.cliente.com/callback
+                  context:
+                    nome-completo-59661f5fe933:
+                      value: John Doe
+                      read_only: false
+                    whatsapp-f9c2322fcc74:
+                      value: "48999999999"
+                      read_only: false
+                    email-6679641e7540:
+                      value: john.doe@developer.com
+                      read_only: true
+                  notification:
+                    whatsapp: "(11) 9 1234-5678"
+              contextReadOnly:
+                summary: Context com campo somente leitura
+                value:
+                  callback_url: https://erp.cliente.com/callback
+                  context:
+                    cpf:
+                      value: "529.982.247-25"
+                      read_only: true
+                    nome:
+                      value: Maria
+                      read_only: false
+                  expires_at: "2026-12-31T23:59:59Z"
+              withNotification:
+                summary: "Com notificação opcional (ex.: WhatsApp)"
+                value:
+                  callback_url: https://erp.cliente.com/callback
+                  context: {}
+                  notification:
+                    whatsapp: "(11) 99465-4119"
+              withAccessVerification:
+                summary: Com etapa opcional de verificação de acesso
+                value:
+                  context:
+                    cpf:
+                      value: "588.843.362-44"
+                      read_only: true
+                  access_verification:
+                    label: Informe seu CPF para prosseguir
+                    expected_value: "588.843.362-44"
+                    mask_percentage: 90
+      responses:
+        "201":
+          description: Execução criada.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FormRun"
+              examples:
+                prefillPorFieldKeys:
+                  summary: Resposta ao request "prefillPorFieldKeys"
+                  value:
+                    key: cc65ba6a-3ed5-44fb-bd28-e996610d69cd
+                    status: pending
+                    form_url: https://app.example.com/cc65ba6a-3ed5-44fb-bd28-e996610d69cd
+                    callback_url: https://erp.cliente.com/callback
+                    context:
+                      nome-completo-59661f5fe933:
+                        value: John Doe
+                        read_only: false
+                      whatsapp-f9c2322fcc74:
+                        value: "48999999999"
+                        read_only: false
+                      email-6679641e7540:
+                        value: john.doe@developer.com
+                        read_only: true
+                    responses: {}
+                    created_at: "2026-05-06T12:00:00Z"
+                    updated_at: "2026-05-06T12:00:00Z"
+                contextReadOnly:
+                  summary: Resposta ao request "contextReadOnly"
+                  value:
+                    key: d1e2f3a4-b5c6-4789-d0e1-f2a3b4c5d6e7
+                    status: pending
+                    form_url: https://app.example.com/d1e2f3a4-b5c6-4789-d0e1-f2a3b4c5d6e7
+                    context:
+                      cpf:
+                        value: "529.982.247-25"
+                        read_only: true
+                      nome:
+                        value: Maria
+                        read_only: false
+                    responses: {}
+                    expires_at: "2026-12-31T23:59:59Z"
+                    created_at: "2026-05-06T12:00:00Z"
+                    updated_at: "2026-05-06T12:00:00Z"
+                withNotification:
+                  summary: Resposta ao request "withNotification"
+                  value:
+                    key: e2f3a4b5-c6d7-4890-e1f2-a3b4c5d6e7f8
+                    status: pending
+                    form_url: https://app.example.com/e2f3a4b5-c6d7-4890-e1f2-a3b4c5d6e7f8
+                    context: {}
+                    responses: {}
+                    created_at: "2026-05-06T12:00:00Z"
+                    updated_at: "2026-05-06T12:00:00Z"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /api/v1/versions/{version_key}/runs/{run_key}:
+    get:
+      tags:
+        - Runs
+      summary: Obtém uma execução (run) por versão
+      description: Implementação `GET /api/v1/versions/{version_key}/runs/{run_key}`.
+      operationId: getRunByVersion
+      parameters:
+        - $ref: "#/components/parameters/VersionKey"
+        - $ref: "#/components/parameters/RunKey"
+      responses:
+        "200":
+          description: Run encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FormRun"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - Runs
+      summary: Atualiza contexto, expires_at ou callback_url do run
+      description: |
+        Implementação `PUT /api/v1/versions/{version_key}/runs/{run_key}`.
+        Run com `status: done` não pode ser alterado (409).
+        Se o run não possuir `access_verification` e a atualização passar a incluir esse objeto,
+        o `status` passa para `access_verification_required`.
+      operationId: updateRun
+      parameters:
+        - $ref: "#/components/parameters/VersionKey"
+        - $ref: "#/components/parameters/RunKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - context
+              properties:
+                context:
+                  type: object
+                  additionalProperties:
+                    type: object
+                expires_at:
+                  type: string
+                  format: date-time
+                callback_url:
+                  type: string
+                  format: uri
+                  description: Opcional; omitir mantém o valor atual; string vazia remove o callback deste run.
+                access_verification:
+                  $ref: "#/components/schemas/RunAccessVerification"
+      responses:
+        "200":
+          description: Run atualizado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FormRun"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          description: Run já finalizado (não pode ser modificado).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+    delete:
+      tags:
+        - Runs
+      summary: Remove uma execução pendente
+      description: "Run com `status: done` não pode ser excluído (409)."
+      operationId: deleteRun
+      parameters:
+        - $ref: "#/components/parameters/VersionKey"
+        - $ref: "#/components/parameters/RunKey"
+      responses:
+        "204":
+          description: Run removido (sem corpo).
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          description: Run já finalizado (não pode ser removido).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Verifica disponibilidade do serviço
+      description: |
+        Consulta o banco de dados. **Não requer** cabeçalho `Authorization`.
+        Retorna JSON com o campo `status`.
+      operationId: getHealth
+      security: []
+      responses:
+        "200":
+          description: Serviço OK — conectividade com banco de dados estabelecida.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    enum: [ok]
+              example:
+                status: ok
+        "429":
+          description: Limite de requisições por IP excedido.
+          headers:
+            Retry-After:
+              description: |
+                Segundos até a próxima tentativa permitida (derivado de `HEALTH_RATE_LIMIT_RPM`;
+                padrão 60 req/min → valor `1`).
+              schema:
+                type: integer
+                minimum: 1
+                example: 1
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    enum: [too_many_requests]
+              example:
+                status: too_many_requests
+        "503":
+          description: Serviço indisponível — falha ao se conectar com o banco de dados.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    enum: [unavailable]
+              example:
+                status: unavailable
+
+components:
+  schemas:
+    VersionSettings:
+      type: object
+      description: Textos de UI e, opcionalmente, rótulos das etapas do formulário.
+      properties:
+        title:
+          type: string
+        subtitle:
+          type: string
+        finish_title:
+          type: string
+        finish_subtitle:
+          type: string
+        finish_info:
+          type: string
+        steps:
+          type: object
+          description: Mapa índice da etapa (string) → rótulo exibido.
+          additionalProperties:
+            type: string
+
+    ConditionRule:
+      type: object
+      description: Regra de visibilidade forward-chaining definida no campo origem.
+      properties:
+        value:
+          description: Valor comparado com o preenchimento do campo pai.
+          oneOf:
+            - type: string
+            - type: number
+            - type: integer
+            - type: boolean
+        operator:
+          type: string
+          example: equal
+        action:
+          type: string
+          description: Ação aplicada aos campos alvo quando a condição é satisfeita.
+          enum:
+            - show
+            - hide
+        fields:
+          type: array
+          description: Labels dos campos afetados pela regra.
+          items:
+            type: string
+
+    FormField:
+      type: object
+      description: Campo do schema da versão (tipos alinhados ao registro de validação da API).
+      required:
+        - label
+        - type
+      properties:
+        key:
+          type: string
+          description: Identificador estável após persistência; pode ser omitido no corpo de criação.
+        label:
+          type: string
+        type:
+          type: string
+          description: >
+            Exemplos text, textarea, number, email, phone_number, date, cpf, cnpj, currency,
+            cep, image, file, header, paragraph, select, radio-group, checkbox-group, repeater.
+        required:
+          type: boolean
+        order:
+          type: integer
+        step:
+          type: integer
+        placeholder:
+          type: string
+        help_balloon:
+          type: string
+          description: Texto de ajuda exibido em balão junto ao rótulo do campo. Opcional; aplicável aos tipos de entrada e sub-campos aninhados em CEP e repeater (não se aplica a `header` e `paragraph`).
+        conditions:
+          type: array
+          items:
+            $ref: "#/components/schemas/ConditionRule"
+        options:
+          type: object
+          description: >
+            Opções por tipo (ex. maxlength, values, other, fields para CEP/repeater).
+            Estrutura variável conforme o `type`.
+          additionalProperties: true
+
+    CreateFormVersionRequest:
+      type: object
+      description: Corpo para criar ou substituir o schema de uma versão.
+      properties:
+        is_active:
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/VersionSettings"
+        fields:
+          type: array
+          items:
+            $ref: "#/components/schemas/FormField"
+
+    FormVersion:
+      type: object
+      description: Versão persistida com campos estáveis (`key`) e metadados de auditoria.
+      properties:
+        key:
+          type: string
+          format: uuid
+        version:
+          type: string
+          format: uuid
+        is_active:
+          type: boolean
+        fields:
+          type: array
+          items:
+            $ref: "#/components/schemas/FormField"
+        settings:
+          $ref: "#/components/schemas/VersionSettings"
+        form_url:
+          type: string
+          format: uri
+          description: URL pública para preenchimento do formulário.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    FormRun:
+      type: object
+      description: Execução (RUN) com dados persistidos e URL pública para preenchimento.
+      properties:
+        key:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+            - pending
+            - done
+            - access_verification_required
+        context:
+          type: object
+          additionalProperties:
+            type: object
+        responses:
+          type: object
+          additionalProperties: true
+        expires_at:
+          type: string
+          format: date-time
+        callback_url:
+          type: string
+          format: uri
+          description: Webhook opcional desta execução (disparado na conclusão, junto com a callback do formulário quando configurada).
+        access_verification:
+          $ref: "#/components/schemas/RunAccessVerification"
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        form_url:
+          type: string
+          format: uri
+          description: URL única do preenchimento do formulário (inclui o contexto do run nas respostas).
+
+    RunAccessVerification:
+      type: object
+      description: Etapa opcional de verificação para liberar o acesso ao formulário da execução.
+      required:
+        - label
+        - expected_value
+      properties:
+        label:
+          type: string
+          description: Mensagem exibida ao usuário final antes da validação do valor.
+        expected_value:
+          type: string
+          description: Valor de comparação esperado para liberar o acesso.
+        mask_percentage:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 90
+          description: Percentual do expected_value que deve ser mascarado na exibição. Quando omitido em access_verification, a API aplica default 90.
+
+  securitySchemes:
+    ApiTokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: "Insira o UUID (access_token) obtido no Távola. Não utilize o prefixo Bearer."
+
+  parameters:
+    FormKey:
+      name: form_key
+      in: path
+      required: true
+      description: UUID do formulário.
+      schema:
+        type: string
+        format: uuid
+    VersionKey:
+      name: version_key
+      in: path
+      required: true
+      description: UUID da versão do schema.
+      schema:
+        type: string
+        format: uuid
+    RunKey:
+      name: run_key
+      in: path
+      required: true
+      description: UUID da execução (run).
+      schema:
+        type: string
+        format: uuid
+
+  responses:
+    BadRequest:
+      description: Requisição inválida.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+          example:
+            error: name is required
+    Unauthorized:
+      description: Autenticação ausente ou inválida.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+          example:
+            error: authorization required
+    NotFound:
+      description: Recurso não encontrado.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+          example:
+            error: form not found
+
+  examples:
+    WithStepsExample:
+      summary: Campos separados por etapas
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+          steps:
+            "0": Informações pessoais
+            "1": Informações de contato
+        fields:
+          - label: Nome completo
+            type: text
+            placeholder: Maria da Silva
+            help_balloon: Use o mesmo nome do documento.
+            required: true
+            step: 0
+            order: 1
+          - label: Whatsapp
+            type: phone_number
+            placeholder: (11) 99999-9999
+            help_balloon: Inclua o DDD para facilitar o retorno.
+            required: true
+            step: 1
+          - label: Email
+            type: email
+            placeholder: nome@empresa.com
+            help_balloon: Informe um e-mail válido para contato.
+            required: true
+            step: 1
+
+    TextExample:
+      summary: Texto curto
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Full name
+            type: text
+            placeholder: Type your full name
+            help_balloon: Campo de texto simples com limite de caracteres.
+            required: true
+            order: 1
+            step: 0
+            options:
+              maxlength: 120
+
+    TextareaExample:
+      summary: Texto longo
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Notes
+            type: textarea
+            placeholder: Additional comments or context
+            help_balloon: Use este campo para textos longos.
+            required: false
+            order: 1
+            step: 0
+            options:
+              maxlength: 2000
+
+    NumberExample:
+      summary: Número
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Quantity
+            type: number
+            placeholder: "0"
+            help_balloon: Aceita valores numéricos.
+            required: true
+            order: 1
+            step: 0
+
+    EmailExample:
+      summary: E-mail do signatário
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Work email
+            type: email
+            placeholder: name@company.com
+            help_balloon: Usaremos este e-mail para notificações.
+            required: true
+            order: 1
+            step: 0
+
+    PhoneNumberExample:
+      summary: Número de Telefone/Whatsapp
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Phone number
+            type: phone_number
+            placeholder: (11) 98765-4321
+            help_balloon: Formato com DDD.
+            required: true
+            order: 1
+            step: 0
+
+    DateExample:
+      summary: Data
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Birth date
+            type: date
+            placeholder: DD/MM/YYYY
+            help_balloon: Informe uma data válida.
+            required: true
+            order: 1
+            step: 0
+
+    CpfExample:
+      summary: CPF
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Tax ID (CPF)
+            type: cpf
+            placeholder: 000.000.000-00
+            help_balloon: Formato esperado de CPF.
+            required: true
+            order: 1
+            step: 0
+
+    CnpjExample:
+      summary: CNPJ
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Company ID (CNPJ)
+            type: cnpj
+            placeholder: 00.000.000/0000-00
+            help_balloon: Formato esperado de CNPJ.
+            required: true
+            order: 1
+            step: 0
+
+    CurrencyExample:
+      summary: Monetário
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Estimated amount
+            type: currency
+            placeholder: 0,00
+            help_balloon: Informe o valor monetário.
+            required: true
+            order: 1
+            step: 0
+
+    CepExample:
+      summary: CEP
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: ZIP code
+            type: cep
+            placeholder: 00000-000
+            help_balloon: Informe o CEP; os campos abaixo compõem o endereço.
+            required: true
+            order: 1
+            step: 0
+            options:
+              fields:
+                - label: Street address
+                  attribute_type: street
+                  required: true
+                  help_balloon: Preenchido automaticamente quando possível.
+                - label: State
+                  attribute_type: state
+                  required: true
+                  help_balloon: UF do endereço.
+                - label: City
+                  attribute_type: city
+                  help_balloon: Município correspondente ao CEP.
+                - label: Neighborhood
+                  attribute_type: neighborhood
+                  help_balloon: Bairro do endereço.
+                - label: Number
+                  attribute_type: number
+                  help_balloon: Número do imóvel (sem letras).
+                - label: Complement
+                  attribute_type: complement
+                  help_balloon: Apartamento, bloco, sala, etc.
+
+    ImageExample:
+      summary: Imagem
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Document photo
+            type: image
+            placeholder: PNG or JPG
+            help_balloon: Upload restrito a imagens.
+            required: true
+            order: 1
+            step: 0
+
+    FileExample:
+      summary: Anexo
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: PDF attachment
+            type: file
+            placeholder: Upload a PDF file
+            help_balloon: "Upload de arquivo genérico (ex.: PDF)."
+            required: false
+            order: 1
+            step: 0
+
+    HeaderExample:
+      summary: Cabeçalho
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Personal data
+            type: header
+            required: false
+            order: 1
+            step: 0
+
+    ParagraphExample:
+      summary: Parágrafo
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Please review the information below carefully.
+            type: paragraph
+            required: false
+            order: 1
+            step: 0
+
+    SelectExample:
+      summary: Lista suspensa
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Marital status
+            type: select
+            placeholder: Select an option
+            help_balloon: Selecione uma opção na lista suspensa.
+            required: true
+            order: 1
+            step: 0
+            options:
+              values:
+                - label: Single
+                  value: S
+                - label: Married
+                  value: C
+
+    RadioGroupExample:
+      summary: Única resposta
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Payment method
+            type: radio-group
+            help_balloon: 'Escolha uma única opção.'
+            required: true
+            order: 1
+            step: 0
+            options:
+              other: true
+              values:
+                - label: Pix
+                  value: PIX
+                - label: Card
+                  value: CARD
+
+    CheckboxGroupExample:
+      summary: Múltiplas respostas
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Interests
+            type: checkbox-group
+            help_balloon: 'Selecione uma ou mais opções.'
+            required: false
+            order: 1
+            step: 0
+            options:
+              other: true
+              values:
+                - label: Marketing
+                  value: MKT
+                - label: Product
+                  value: PROD
+
+    RepeaterExample:
+      summary: Repetidor de campos
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Dependents
+            type: repeater
+            placeholder: Add one row per dependent
+            help_balloon: Adicione um ou mais blocos de dependentes.
+            required: false
+            order: 1
+            step: 0
+            options:
+              button_label: Add dependent
+              fields:
+                - label: Name
+                  type: text
+                  placeholder: Dependent full name
+                  help_balloon: Sub-campo text dentro do repeater.
+                  key: dependent_name
+                  required: true
+                  order: 1
+
+    ConditionalForwardChainingExample:
+      summary: Campos com regras condicionais
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Plan
+            type: select
+            placeholder: Choose your plan
+            help_balloon: A seleção pode exibir ou ocultar outros campos.
+            required: true
+            order: 1
+            step: 0
+            options:
+              values:
+                - label: Full
+                  value: FULL
+                - label: Basic
+                  value: BASIC
+            conditions:
+              - action: show
+                operator: equal
+                fields:
+                  - Plan details
+                value: FULL
+          - label: Plan details
+            type: text
+            placeholder: Describe coverage needs
+            help_balloon: 'Exibido quando o plano selecionado for "Full".'
+            required: false
+            order: 2
+            step: 0

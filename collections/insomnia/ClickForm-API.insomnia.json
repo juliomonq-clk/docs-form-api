@@ -1,0 +1,380 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-07-07T21:45:45.143Z",
+  "__export_source": "insomnia.importers:v0.1.0",
+  "resources": [
+    {
+      "_type": "workspace",
+      "_id": "__WORKSPACE_ID__",
+      "parentId": null,
+      "name": "ClickForm — Motor de Coleta de Dados 1.0.0",
+      "description": "**📄 Visão geral**\n\nO ClickForm é um motor de coleta de dados desacoplado da geração de documentos, permitindo que sistemas criem e executem formulários versionados consumidos via API por múltiplos canais.\n\nEle permite a criação de links dinâmicos para preenchimento único (com injeção de dados prévios para reduzir a fricção na jornada do usuário), armazenamento estruturado das respostas em formato JSON e envio automatizado de callbacks (webhooks) para sistemas externos após cada submissão.\n\nAlém disso, a arquitetura suporta a customização visual do formulário e das mensagens de sucesso com base nas configurações da conta no monolito Távola.\n\n**💾 Modelo de domínio**\n\nA API opera de forma stateless, com o estado autoritativo persistido de forma segura e altamente escalável. O domínio está estruturado em 3 modelos principais:\n* **Form:** Representa a definição base e os metadados do formulário.\n* **Version:** Representa a estrutura imutável do formulário, contendo os campos e a configuração de cada versão.\n* **Run:** Representa as instâncias do formulário em execução. É onde ocorre a injeção do \"context\" com dados pré-preenchidos para geração do link do formulário para preenchimento único.\n\n**🔒 Autenticação e Segurança**\n\nA autenticação é exclusivamente através do envio de um access_token (UUID) no Header HTTP `Authorization` (informado sem prefixos como \"Bearer\").\nEsse token pode ser obtido na página de configurações da API no Távola.\n"
+    },
+    {
+      "parentId": "__WORKSPACE_ID__",
+      "name": "Base environment",
+      "data": {},
+      "_type": "environment",
+      "_id": "__BASE_ENVIRONMENT_ID__"
+    },
+    {
+      "parentId": "__WORKSPACE_ID__",
+      "name": "Forms",
+      "environment": {},
+      "_id": "fld___WORKSPACE_ID__4bec9575",
+      "_type": "request_group",
+      "description": "Formulários base e metadados."
+    },
+    {
+      "parentId": "__WORKSPACE_ID__",
+      "name": "Versions",
+      "environment": {},
+      "_id": "fld___WORKSPACE_ID__a239107e",
+      "_type": "request_group",
+      "description": "Versões de formulários (campos e configurações)."
+    },
+    {
+      "parentId": "__WORKSPACE_ID__",
+      "name": "Runs",
+      "environment": {},
+      "_id": "fld___WORKSPACE_ID__fcde5c32",
+      "_type": "request_group",
+      "description": "Pré-preenchimento de uma versão - criação de rota de formulário individual."
+    },
+    {
+      "parentId": "__WORKSPACE_ID__",
+      "name": "Health",
+      "environment": {},
+      "_id": "fld___WORKSPACE_ID__3703cd21",
+      "_type": "request_group",
+      "description": "Disponibilidade do serviço"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__4bec9575",
+      "name": "Lista todos os formulários",
+      "url": "{{ base_url }}/api/v1/forms",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__a2a17ce7",
+      "method": "GET"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__4bec9575",
+      "name": "Cria o formulário base",
+      "url": "{{ base_url }}/api/v1/forms",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"string\",\n  \"callback_url\": \"string\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__dff59214",
+      "method": "POST"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__4bec9575",
+      "name": "Retorna metadados de um formulário específico",
+      "url": "{{ base_url }}/api/v1/forms/{{ form_key }}",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__c7f54a18",
+      "method": "GET"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__4bec9575",
+      "name": "Atualiza os metadados do formulário",
+      "url": "{{ base_url }}/api/v1/forms/{{ form_key }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"string\",\n  \"callback_url\": \"string\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__9588dacf",
+      "method": "PUT"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__4bec9575",
+      "name": "Remove um formulário",
+      "url": "{{ base_url }}/api/v1/forms/{{ form_key }}",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__60a87c8a",
+      "method": "DELETE"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__a239107e",
+      "name": "Lista todas as versões de um formulário",
+      "url": "{{ base_url }}/api/v1/forms/{{ form_key }}/versions",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__73a23b8f",
+      "method": "GET"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__a239107e",
+      "name": "Cria uma nova versão (schema) do formulário",
+      "url": "{{ base_url }}/api/v1/forms/{{ form_key }}/versions",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"is_active\": true,\n  \"settings\": {\n    \"title\": \"string\",\n    \"subtitle\": \"string\",\n    \"finish_title\": \"string\",\n    \"finish_subtitle\": \"string\",\n    \"finish_info\": \"string\",\n    \"steps\": {}\n  },\n  \"fields\": [\n    {\n      \"key\": \"string\",\n      \"label\": \"string\",\n      \"type\": \"string\",\n      \"required\": true,\n      \"order\": 0,\n      \"step\": 0,\n      \"placeholder\": \"string\",\n      \"help_balloon\": \"string\",\n      \"conditions\": [\n        {\n          \"value\": null,\n          \"operator\": \"equal\",\n          \"action\": \"string\",\n          \"fields\": [\n            \"string\"\n          ]\n        }\n      ],\n      \"options\": {}\n    }\n  ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__d6a8f19f",
+      "method": "POST"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__a239107e",
+      "name": "Retorna a estrutura da versão",
+      "url": "{{ base_url }}/api/v1/forms/{{ form_key }}/versions/{{ version_key }}",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__de2da740",
+      "method": "GET"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__a239107e",
+      "name": "Atualiza metadados da versão (ex.: is_active)",
+      "url": "{{ base_url }}/api/v1/forms/{{ form_key }}/versions/{{ version_key }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"is_active\": true,\n  \"settings\": {\n    \"title\": \"string\",\n    \"subtitle\": \"string\",\n    \"finish_title\": \"string\",\n    \"finish_subtitle\": \"string\",\n    \"finish_info\": \"string\",\n    \"steps\": {}\n  },\n  \"fields\": [\n    {\n      \"key\": \"string\",\n      \"label\": \"string\",\n      \"type\": \"string\",\n      \"required\": true,\n      \"order\": 0,\n      \"step\": 0,\n      \"placeholder\": \"string\",\n      \"help_balloon\": \"string\",\n      \"conditions\": [\n        {\n          \"value\": null,\n          \"operator\": \"equal\",\n          \"action\": \"string\",\n          \"fields\": [\n            \"string\"\n          ]\n        }\n      ],\n      \"options\": {}\n    }\n  ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__2ead578b",
+      "method": "PUT"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__a239107e",
+      "name": "Remove uma versão específica",
+      "url": "{{ base_url }}/api/v1/forms/{{ form_key }}/versions/{{ version_key }}",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__baaf7f1a",
+      "method": "DELETE"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__fcde5c32",
+      "name": "Lista todas as execuções associadas a uma versão",
+      "url": "{{ base_url }}/api/v1/versions/{{ version_key }}/runs",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__13100f03",
+      "method": "GET"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__fcde5c32",
+      "name": "Cria uma versão pré-preenchida do formulário para preenchimento único",
+      "url": "{{ base_url }}/api/v1/versions/{{ version_key }}/runs",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"context\": {},\n  \"expires_at\": \"2026-07-07T21:45:45.141Z\",\n  \"callback_url\": \"string\",\n  \"notification\": {},\n  \"access_verification\": {\n    \"label\": \"string\",\n    \"expected_value\": \"string\",\n    \"mask_percentage\": 90\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__4e0adb8f",
+      "method": "POST"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__fcde5c32",
+      "name": "Obtém uma execução (run) por versão",
+      "url": "{{ base_url }}/api/v1/versions/{{ version_key }}/runs/{{ run_key }}",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__1f858bd5",
+      "method": "GET"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__fcde5c32",
+      "name": "Atualiza contexto, expires_at ou callback_url do run",
+      "url": "{{ base_url }}/api/v1/versions/{{ version_key }}/runs/{{ run_key }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"context\": {},\n  \"expires_at\": \"2026-07-07T21:45:45.143Z\",\n  \"callback_url\": \"string\",\n  \"access_verification\": {\n    \"label\": \"string\",\n    \"expected_value\": \"string\",\n    \"mask_percentage\": 90\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__8f0ae1db",
+      "method": "PUT"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__fcde5c32",
+      "name": "Remove uma execução pendente",
+      "url": "{{ base_url }}/api/v1/versions/{{ version_key }}/runs/{{ run_key }}",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ access_token }}"
+        }
+      ],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__3667ba37",
+      "method": "DELETE"
+    },
+    {
+      "parentId": "fld___WORKSPACE_ID__3703cd21",
+      "name": "Verifica disponibilidade do serviço",
+      "url": "{{ base_url }}/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "_type": "request",
+      "_id": "req___WORKSPACE_ID__279d6d86",
+      "method": "GET"
+    },
+    {
+      "parentId": "__BASE_ENVIRONMENT_ID__",
+      "name": "Sandbox",
+      "data": {
+        "base_url": "",
+        "access_token": "",
+        "form_key": "",
+        "version_key": "",
+        "run_key": ""
+      },
+      "_type": "environment",
+      "_id": "env_sandbox"
+    },
+    {
+      "parentId": "__BASE_ENVIRONMENT_ID__",
+      "name": "Produção",
+      "data": {
+        "base_url": "",
+        "access_token": "",
+        "form_key": "",
+        "version_key": "",
+        "run_key": ""
+      },
+      "_type": "environment",
+      "_id": "env_producao"
+    }
+  ]
+}

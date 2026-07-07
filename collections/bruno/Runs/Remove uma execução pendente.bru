@@ -1,0 +1,15 @@
+meta {
+  name: Remove uma execução pendente
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{base_url}}/api/v1/versions/{{version_key}}/runs/{{run_key}}
+  body: none
+  auth: inherit
+}
+
+docs {
+  Run com `status: done` não pode ser excluído (409).
+}

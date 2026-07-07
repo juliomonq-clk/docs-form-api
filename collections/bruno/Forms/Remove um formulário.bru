@@ -1,0 +1,11 @@
+meta {
+  name: Remove um formulário
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{base_url}}/api/v1/forms/{{form_key}}
+  body: none
+  auth: inherit
+}
