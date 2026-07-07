@@ -29,9 +29,11 @@ Todas as coleções usam as mesmas variáveis:
 
 | Variável | Descrição | Default |
 |---|---|---|
-| `base_url` | Host + prefixo da API do ClickForm | **Em aberto** — não documentado publicamente ainda, confirmar com o time técnico (ver [`../docs/03-autenticacao.md`](../docs/03-autenticacao.md)) |
+| `base_url` | Host da API do ClickForm | Sandbox: `https://clickform-sandbox.clicksign.com` |
 | `access_token` | Seu Access Token | (vazio, preencha) |
 | `form_key`, `version_key`, `run_key` | IDs usados nos paths | (vazio, preencha conforme for testando o fluxo) |
+
+⚠️ **Use o ambiente Sandbox como padrão** para testes e integração. Produção (`https://clickform.clicksign.com`) afeta dados reais de conta — use apenas com integração já validada.
 
 ## Como importar
 
@@ -53,4 +55,4 @@ Todas as coleções usam as mesmas variáveis:
 
 - Os corpos de exemplo de cada request vêm diretamente dos `examples` nomeados da spec OpenAPI (ex.: pré-preenchimento por `run_key`, campo com `read_only`, verificação de acesso) — não foram inventados para as coleções.
 - A criação de `Version` (`POST /api/v1/forms/{form_key}/versions`) tem um exemplo por tipo de campo (texto, CPF, CEP, repeater, Skip Logic etc.) na própria spec — vale abrir `openapi/clickform-api.openapi.yaml` para ver todos antes de montar seu próprio schema.
-- `base_url` não vem preenchido em nenhum ambiente — a spec não fixa um `servers` público até o momento. Ver [`../docs/03-autenticacao.md`](../docs/03-autenticacao.md) para o que falta confirmar antes de publicar este repositório externamente.
+- A spec não declara um bloco `servers` — por isso o `base_url` de cada ambiente vem preenchido diretamente nas coleções (Postman/Insomnia/Bruno), e não a partir do próprio OpenAPI.

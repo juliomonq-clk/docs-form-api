@@ -4044,7 +4044,7 @@
       "key": "base_url",
       "value": "",
       "type": "string",
-      "description": "Host + prefixo da API do ClickForm (ex.: https://SUBSTITUIR/api). Confirmar com o time técnico — não documentado publicamente ainda."
+      "description": "Host da API do ClickForm. Sandbox: https://clickform-sandbox.clicksign.com — use como padrão para testes. Produção: https://clickform.clicksign.com (dados reais, use com cautela). Selecione o ambiente Postman correspondente em vez de editar este default."
     },
     {
       "key": "form_key",

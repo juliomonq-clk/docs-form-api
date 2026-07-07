@@ -354,7 +354,7 @@
       "parentId": "__BASE_ENVIRONMENT_ID__",
       "name": "Sandbox",
       "data": {
-        "base_url": "",
+        "base_url": "https://clickform-sandbox.clicksign.com",
         "access_token": "",
         "form_key": "",
         "version_key": "",
@@ -367,7 +367,7 @@
       "parentId": "__BASE_ENVIRONMENT_ID__",
       "name": "Produção",
       "data": {
-        "base_url": "",
+        "base_url": "https://clickform.clicksign.com",
         "access_token": "",
         "form_key": "",
         "version_key": "",

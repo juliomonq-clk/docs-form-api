@@ -61,7 +61,8 @@ Dúvidas de acesso/credenciais: `professionalservices@clicksign.com`.
 
 ## Status deste documento
 
-Este repositório documenta apenas o que já está confirmado no contrato de API (spec OpenAPI em [`collections/openapi`](collections/openapi/clickform-api.openapi.yaml)) ou validado com o time técnico do ClickForm. Há dois pontos ainda em aberto, sinalizados também em [`docs/03-autenticacao.md`](docs/03-autenticacao.md) e [`collections/README.md`](collections/README.md):
+Este repositório documenta apenas o que já está confirmado no contrato de API (spec OpenAPI em [`collections/openapi`](collections/openapi/clickform-api.openapi.yaml)) ou validado com o time técnico do ClickForm. Um ponto ainda em aberto:
 
-- **Hostname de sandbox/produção** — a spec não fixa uma URL base; precisa ser confirmado com o time técnico antes deste repositório ser compartilhado externamente.
 - **Verificação de assinatura do webhook** — não há, até o momento, um mecanismo documentado (ex.: HMAC) para a empresa integradora validar a autenticidade do callback recebido. Vale confirmar com o time técnico se existe e não está documentado, ou se é uma lacuna real.
+
+Hostnames de sandbox e produção estão confirmados — ver [`docs/03-autenticacao.md`](docs/03-autenticacao.md). **Use sandbox como padrão para testes e integração.**

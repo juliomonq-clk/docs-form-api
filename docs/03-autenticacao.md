@@ -29,13 +29,16 @@ Ele consulta a disponibilidade do banco de dados e não expõe dado de conta nen
 
 ## Ambientes (sandbox / produção)
 
-**Em aberto:** a especificação da API não fixa hoje uma URL base (`servers`) documentada publicamente. Antes de publicar este repositório para uma empresa integradora, confirme com o time técnico do ClickForm:
+A especificação da API não fixa uma URL base (`servers`) — o host varia por ambiente:
 
-- O hostname de sandbox (ambiente de testes).
-- O hostname de produção.
-- Se existe algum processo de rotação/expiração do `access_token`.
+| Ambiente | `base_url` |
+|---|---|
+| **Sandbox** (use este para testes/integração) | `https://clickform-sandbox.clicksign.com` |
+| Produção | `https://clickform.clicksign.com` |
 
-Enquanto isso não for confirmado, trate `base_url` como uma variável a preencher manualmente nas [coleções de teste](../collections/README.md).
+Use **sandbox** como ambiente padrão de desenvolvimento e teste de integração. Produção deve ser usada apenas quando a integração já estiver validada — as chamadas afetam dados reais de conta.
+
+**Em aberto:** não há, até o momento, um processo documentado de rotação/expiração do `access_token`. Confirmar com o time técnico se necessário.
 
 ## Próximo passo
 
