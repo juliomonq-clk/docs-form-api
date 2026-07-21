@@ -24,6 +24,9 @@ Hoje, primariamente por link web, com suporte a webview nativa dentro do WhatsAp
 **O que acontece se eu tentar editar um Run já concluído?**
 A API retorna `409 Conflict`. Um Run com `status: done` é imutável — ver [regra de imutabilidade](02-conceitos-e-modelo-de-dados.md#regra-de-imutabilidade).
 
+**Editar um campo de uma Version já publicada afeta quem já respondeu ou está respondendo?**
+Um Run `done` nunca é afetado (é imutável, ver acima). Para um Run `pending` — **[CORREÇÃO 21/07/2026]** a versão anterior desta doc dizia que cada Run travava no schema com que foi criado; isso não está confirmado. `PUT` numa Version altera a mesma `version_key`, então o efeito sobre um Run `pending` que já a referencia (ou uma tela de Link Reutilizável já aberta) é uma pergunta em aberto, não uma garantia de isolamento. Até confirmação, evite editar `fields`/`settings` de uma Version com Runs `pending` em andamento — prefira criar uma nova Version via `POST` nesse caso.
+
 **Como valido que o webhook recebido realmente veio do ClickForm?**
 Em aberto — não há, até o momento, um mecanismo de verificação de assinatura documentado. Confirme com o time técnico do ClickForm antes de depender disso em produção.
 

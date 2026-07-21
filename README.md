@@ -29,12 +29,12 @@ O domínio do ClickForm tem três entidades, separando configuração de execuç
 
 ```
 Form (casca: nome + callback_url)
-  └── Version (schema imutável: campos + configurações visuais)
+  └── Version (schema: campos + configurações visuais — editável in-place via PUT na mesma version_key, ver correção 21/07/2026)
         └── Run (execução: dados pré-preenchidos + respostas coletadas)
 ```
 
 - **Form** — metadados base e o webhook padrão de destino.
-- **Version** — o schema versionado e imutável (campos, tipos, Skip Logic).
+- **Version** — o schema versionado (campos, tipos, Skip Logic). **Não é imutável:** `PUT` na mesma `version_key` substitui `fields`/`settings`/`is_active` — ver [`02-conceitos-e-modelo-de-dados.md`](docs/02-conceitos-e-modelo-de-dados.md#version) para o detalhe e a pendência em aberto sobre efeito em Runs `pending`.
 - **Run** — uma instância de preenchimento único, com link próprio (`form_url`) e dados de pré-preenchimento (`context`).
 
 Detalhe completo em [`docs/02-conceitos-e-modelo-de-dados.md`](docs/02-conceitos-e-modelo-de-dados.md).

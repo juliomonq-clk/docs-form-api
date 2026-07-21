@@ -16,7 +16,9 @@ Um Form pode ter várias `Versions` ao longo do tempo, mas só a mais recente at
 
 ## Version
 
-Uma **Version** é o schema versionado e **imutável** do formulário: os campos, o texto da interface e a configuração de etapas.
+Uma **Version** é o schema do formulário: os campos, o texto da interface e a configuração de etapas.
+
+**[CORREÇÃO 21/07/2026] Não é imutável.** `PUT /api/v1/forms/{form_key}/versions/{version_key}` substitui `fields`/`settings`/`is_active` **na mesma `version_key`** (ver exemplo `fullReplace` no OpenAPI) — não cria uma versão nova. Criar uma nova Version (`POST`) é uma operação separada e continua disponível, mas editar a existente in-place via `PUT` também é.
 
 | Campo | Descrição |
 |---|---|
@@ -27,7 +29,7 @@ Uma **Version** é o schema versionado e **imutável** do formulário: os campos
 | `form_url` | URL pública de preenchimento desta versão |
 | `created_at` / `updated_at` | Timestamps |
 
-Criar uma nova Version não altera versões anteriores — Runs já criados continuam referenciando o schema com que foram abertos.
+Criar uma nova Version (`POST`) não altera versões anteriores. **Em aberto, não confirmado:** o efeito de um `PUT` na mesma `version_key` sobre um Run `pending` que já referencia esse schema (ou uma tela de Link Reutilizável já carregada) — se o webview rebusca o schema antes do envio, e o que ocorre se a resposta referenciar um campo removido pelo `PUT` ou deixar de preencher um campo que passou a `required` depois que a tela já estava aberta. Até essa confirmação, evite editar `fields`/`settings` de uma Version com Runs `pending` conhecidos — prefira criar uma nova Version via `POST`.
 
 ## Run
 
@@ -74,7 +76,7 @@ Objeto opcional em `access_verification`, com `label` (mensagem exibida ao usuá
 
 ```
 Form
- └── Version (schema imutável, pode haver várias ao longo do tempo)
+ └── Version (editável in-place via PUT na mesma version_key; pode haver várias ao longo do tempo)
        └── Run #1 (pending → done)
        └── Run #2 (access_verification_required → pending → done)
        └── Run #N

@@ -15,7 +15,7 @@ info:
 
     A API opera de forma stateless, com o estado autoritativo persistido de forma segura e altamente escalável. O domínio está estruturado em 3 modelos principais:
     * **Form:** Representa a definição base e os metadados do formulário.
-    * **Version:** Representa a estrutura imutável do formulário, contendo os campos e a configuração de cada versão.
+    * **Version:** Representa a estrutura do formulário (campos + configuração) de uma versão. Não é imutável: `PUT` na mesma `version_key` substitui `fields`/`settings`/`is_active` in-place (ver `PUT /api/v1/forms/{form_key}/versions/{version_key}`) — não gera uma versão nova.
     * **Run:** Representa as instâncias do formulário em execução. É onde ocorre a injeção do "context" com dados pré-preenchidos para geração do link do formulário para preenchimento único.
 
     **🔒 Autenticação e Segurança**
