@@ -42,7 +42,7 @@ Um **Run** é uma execução: uma instância de preenchimento único, com link p
 | `context` | Mapa de dados pré-injetados (Two-Way API / Smart Fill) |
 | `responses` | Respostas coletadas do usuário final (populado ao concluir) |
 | `form_url` | URL única de preenchimento deste Run |
-| `expires_at` | Expiração opcional do link |
+| `expires_at` | Data de expiração do link (`date-time`). **⚠️ O contrato não descreve o comportamento de expiração**, e a verificação interna de 21/07/2026 (engenharia) indica que hoje o campo **não é aplicado**: é gravado no registro do Run, mas não bloqueia o preenchimento depois de vencido, não altera o `status` e não dispara evento. O **link único deixa de valer após a resposta**; um link ainda não respondido permanece acessível sem timeout de sessão ou de inatividade. **Confirme com o time antes de construir integração que dependa deste campo para expirar um link** |
 | `callback_url` | Webhook exclusivo deste Run (disparado junto com o do Form, quando ambos configurados) |
 | `access_verification` | Gate opcional de validação antes de liberar o preenchimento |
 | `created_at` / `updated_at` | Timestamps |
