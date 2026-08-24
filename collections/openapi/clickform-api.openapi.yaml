@@ -268,6 +268,8 @@ paths:
                 $ref: "#/components/examples/TextareaExample"
               "Número":
                 $ref: "#/components/examples/NumberExample"
+              "Intervalo numérico":
+                $ref: "#/components/examples/NumberRangeExample"
               "E-mail do signatário":
                 $ref: "#/components/examples/EmailExample"
               "Número de Telefone/Whatsapp":
@@ -915,8 +917,9 @@ components:
         type:
           type: string
           description: >
-            Exemplos text, textarea, number, email, phone_number, date, cpf, cnpj, currency,
-            cep, image, file, header, paragraph, select, radio-group, checkbox-group, repeater.
+            Exemplos text, textarea, number, number_range, email, phone_number, date, cpf, cnpj,
+            currency, cep, image, file, header, paragraph, select, radio-group, checkbox-group,
+            repeater.
         required:
           type: boolean
         order:
@@ -935,7 +938,10 @@ components:
         options:
           type: object
           description: >
-            Opções por tipo (ex. maxlength, values, other, fields para CEP/repeater).
+            Opções por tipo (ex. maxlength, values, other, fields para CEP/repeater,
+            min_value/max_value/decimal_places/min_error_message/max_error_message para number_range).
+            Em number_range, min_error_message e max_error_message podem usar os placeholders
+            {min_value}, {max_value} e {decimal_places}.
             Estrutura variável conforme o `type`.
           additionalProperties: true
 
@@ -1200,6 +1206,30 @@ components:
             required: true
             order: 1
             step: 0
+
+    NumberRangeExample:
+      summary: Intervalo numérico
+      value:
+        settings:
+          title: Atualização de contato
+          subtitle: Por favor, confirme os dados de contato.
+          finish_title: Atualização de dados concluída!
+          finish_subtitle: Em breve nossa equipe entrará em contato.
+          finish_info: Visite nosso site para mais informações.
+        fields:
+          - label: Taxa de administração
+            type: number_range
+            placeholder: Taxa de administração
+            help_balloon: Valor numérico com limites mínimo e máximo, casas decimais e mensagens de erro configuráveis.
+            required: false
+            order: 1
+            step: 0
+            options:
+              min_value: 1.2
+              max_value: 4.5
+              decimal_places: 2
+              min_error_message: "Informe um valor a partir de {min_value} com até {decimal_places} casas decimais."
+              max_error_message: "Informe um valor até {max_value} com até {decimal_places} casas decimais."
 
     EmailExample:
       summary: E-mail do signatário

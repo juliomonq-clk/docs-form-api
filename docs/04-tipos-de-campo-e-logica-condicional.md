@@ -22,7 +22,7 @@ Todo campo em `fields[]` de uma Version tem:
 | Categoria | `type` |
 |---|---|
 | Texto | `text`, `textarea` |
-| Numérico | `number`, `currency` |
+| Numérico | `number`, `number_range` (ver abaixo), `currency` |
 | Contato | `email`, `phone_number` |
 | Data | `date` |
 | Documentos (com máscara) | `cpf`, `cnpj` |
@@ -31,6 +31,42 @@ Todo campo em `fields[]` de uma Version tem:
 | Seleção | `select`, `radio-group`, `checkbox-group` — opções em `options.values[]` (`label`/`value`); `options.other: true` libera resposta livre |
 | Estrutural (não coleta dado) | `header`, `paragraph` |
 | Dinâmico | `repeater` — clona um bloco de subcampos |
+
+## Intervalo numérico (`number_range`)
+
+`type: "number_range"` é um campo numérico com limites e precisão declarados na própria Version — use quando a resposta só é válida dentro de uma faixa (ex.: uma taxa entre 1,2% e 4,5%, com duas casas decimais). Diferente de `number`, que aceita qualquer numeral, e de `currency`, que carrega formatação monetária.
+
+Configuração em `options`:
+
+| Propriedade | Descrição |
+|---|---|
+| `min_value` | Valor mínimo aceito (obrigatório) |
+| `max_value` | Valor máximo aceito (opcional — sem ele, a faixa é meio-aberta, ex.: "mínimo 18, sem teto") |
+| `decimal_places` | Casas decimais permitidas (opcional, `0` a `6`, default `0`) |
+| `min_error_message` | Mensagem exibida quando o valor informado é menor que `min_value` |
+| `max_error_message` | Mensagem exibida quando o valor informado é maior que `max_value` |
+
+As duas mensagens aceitam os placeholders `{min_value}`, `{max_value}` e `{decimal_places}`, substituídos na exibição pelos valores configurados no campo.
+
+```json
+{
+  "label": "Taxa de administração",
+  "type": "number_range",
+  "placeholder": "Taxa de administração",
+  "required": false,
+  "order": 1,
+  "step": 0,
+  "options": {
+    "min_value": 1.2,
+    "max_value": 4.5,
+    "decimal_places": 2,
+    "min_error_message": "Informe um valor a partir de {min_value} com até {decimal_places} casas decimais.",
+    "max_error_message": "Informe um valor até {max_value} com até {decimal_places} casas decimais."
+  }
+}
+```
+
+No webhook de resposta, o valor é entregue como **número canônico** (ponto como separador decimal), independentemente do separador usado no preenchimento.
 
 ## Skip Logic (campos condicionais)
 

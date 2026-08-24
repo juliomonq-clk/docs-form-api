@@ -15,7 +15,7 @@ Respostas de erro seguem o mesmo formato simples:
 | `200` | OK | Leitura ou atualização bem-sucedida |
 | `201` | Criado | Form, Version ou Run criados com sucesso |
 | `204` | Sem conteúdo | Remoção bem-sucedida (Form, Version ou Run) |
-| `400` | Requisição inválida | Corpo malformado ou campo obrigatório ausente (ex.: `name is required`) |
+| `400` | Requisição inválida | Corpo malformado ou campo obrigatório ausente (ex.: `name is required`); também na configuração inválida de um campo `number_range` — `min_value` ausente, `min_value` maior que `max_value`, ou `decimal_places` não inteiro, negativo ou maior que `6` |
 | `401` | Não autenticado | `Authorization` ausente ou inválido |
 | `404` | Não encontrado | `form_key`, `version_key` ou `run_key` inexistente |
 | `409` | Conflito | `PUT`/`DELETE` em um Run com `status: done` |
