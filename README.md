@@ -53,7 +53,7 @@ Este repositório cobre a API pública do ClickForm, válida para os três model
 
 Na versão atual, a criação e a configuração de um formulário são feitas **via API/JSON** (não há builder visual). O fluxo típico para uma empresa nova é:
 
-1. Contato comercial/técnico com a Clicksign para provisionar o `access_token` (gerado na página de configurações da API no Távola).
+1. Contato comercial/técnico com a Clicksign para provisionar o `access_token` (gerado na página de configurações da API no painel da Clicksign).
 2. Definição do schema do formulário (campos, validações, Skip Logic) em JSON — hoje normalmente com apoio do time de Professional Services da Clicksign.
 3. Integração da empresa contratante para criar `Runs` (pré-preenchimento) e consumir os webhooks de resposta.
 

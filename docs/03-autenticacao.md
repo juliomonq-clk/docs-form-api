@@ -13,9 +13,9 @@ Authorization: 9b2e4f6a-1c3d-5e7f-8091-a2b3c4d5e6f7
 
 ## Onde obter o token
 
-O `access_token` é gerado na página de configurações da API no **Távola** (painel administrativo da conta Clicksign). Ele está atrelado a uma conta (`account_id`) e a um usuário (`user_id`) — todos os recursos criados com esse token pertencem a essa conta.
+O `access_token` é gerado na página de configurações da API no **painel da Clicksign**. Ele está atrelado a uma conta (`account_id`) e a um usuário (`user_id`) — todos os recursos criados com esse token pertencem a essa conta.
 
-Se sua empresa ainda não tem acesso ao Távola ou precisa provisionar credenciais, contate `professionalservices@clicksign.com`.
+Se sua empresa ainda não tem acesso ao painel da Clicksign ou precisa provisionar credenciais, contate `professionalservices@clicksign.com`.
 
 ## Endpoint sem autenticação
 

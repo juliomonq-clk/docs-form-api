@@ -9,7 +9,7 @@ info:
 
     Ele permite a criação de links dinâmicos para preenchimento único (com injeção de dados prévios para reduzir a fricção na jornada do usuário), armazenamento estruturado das respostas em formato JSON e envio automatizado de callbacks (webhooks) para sistemas externos após cada submissão.
 
-    Além disso, a arquitetura suporta a customização visual do formulário e das mensagens de sucesso com base nas configurações da conta no monolito Távola.
+    Além disso, a arquitetura suporta a customização visual do formulário e das mensagens de sucesso com base nas configurações da conta Clicksign.
 
     **💾 Modelo de domínio**
 
@@ -21,7 +21,7 @@ info:
     **🔒 Autenticação e Segurança**
 
     A autenticação é exclusivamente através do envio de um access_token (UUID) no Header HTTP `Authorization` (informado sem prefixos como "Bearer").
-    Esse token pode ser obtido na página de configurações da API no Távola.
+    Esse token pode ser obtido na página de configurações da API no painel da Clicksign.
 
 tags:
   - name: Forms
@@ -1052,7 +1052,7 @@ components:
       type: apiKey
       in: header
       name: Authorization
-      description: "Insira o UUID (access_token) obtido no Távola. Não utilize o prefixo Bearer."
+      description: "Insira o UUID (access_token) obtido no painel da Clicksign. Não utilize o prefixo Bearer."
 
   parameters:
     FormKey:

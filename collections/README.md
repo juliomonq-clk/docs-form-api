@@ -21,7 +21,7 @@ Todas as chamadas autenticadas usam:
 
 O `/health` é o único endpoint sem autenticação.
 
-Gere o `access_token` na página de configurações da API no Távola. Detalhe completo em [`../docs/03-autenticacao.md`](../docs/03-autenticacao.md).
+Gere o `access_token` na página de configurações da API no painel da Clicksign. Detalhe completo em [`../docs/03-autenticacao.md`](../docs/03-autenticacao.md).
 
 ## Variáveis de ambiente
 
