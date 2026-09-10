@@ -28,7 +28,7 @@ Todo campo em `fields[]` de uma Version tem:
 | Documentos (com máscara) | `cpf`, `cnpj` |
 | Endereço | `cep` — autopreenche subcampos via `options.fields[].attribute_type` (`street`, `state`, `city`, `neighborhood`, `number`, `complement`) |
 | Upload | `image` (JPG/PNG), `file` (PDF/DOCX/imagens) |
-| Seleção | `select`, `radio-group`, `checkbox-group` — opções em `options.values[]` (`label`/`value`); `options.other: true` libera resposta livre |
+| Seleção | `select`, `radio-group`, `checkbox-group` — opções em `options.values[]` (`label`/`value`); `options.other: true` libera resposta livre; `options.values[].selected: true` pré-seleciona uma opção como resposta default, antes do usuário responder |
 | Estrutural (não coleta dado) | `header`, `paragraph` |
 | Dinâmico | `repeater` — clona um bloco de subcampos |
 

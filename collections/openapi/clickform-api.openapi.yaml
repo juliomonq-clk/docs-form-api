@@ -1492,6 +1492,7 @@ components:
               values:
                 - label: Pix
                   value: PIX
+                  selected: true
                 - label: Card
                   value: CARD
 
